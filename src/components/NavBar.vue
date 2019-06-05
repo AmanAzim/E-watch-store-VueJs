@@ -1,6 +1,6 @@
 <template>
     <NavWrapper class="navbar navbar-expand-sm navbar-dark px-sm-5">
-        <router-link to="/"><img v-bind:src="logo" alt="E-Handy Shop" class="navbar-brand"/></router-link>
+        <router-link to="/"><img v-bind:src="logo" alt="E-Handy Shop" class="myLogo navbar-brand"/></router-link>
         <ul class="navbar-nav align-items-center">
             <li class="nav-item ml-5">
                 <router-link to="/" class="nav-link">Products</router-link>
@@ -39,5 +39,8 @@
 </script>
 
 <style scoped>
-
+    .myLogo {
+        height: 3.9rem;
+        width: 5rem;
+    }
 </style>
