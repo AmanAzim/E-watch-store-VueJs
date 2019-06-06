@@ -2,7 +2,7 @@
     <div class="col-lg-3 col-md-6 col-9 mx-auto my-3">
         <div class="card">
 
-            <div class="img-container py-5">
+            <div class="img-container py-5" v-on:click="handelDetail(product.id)">
                 <router-link to="/details"><img v-bind:src="product.img" alt="product" class="card-img-top"/></router-link>
 
                 <button class="cart-btn" v-bind:disabled="product.inCart" v-on:click="AddToCart(product.id); OpenModal(product.id)">
@@ -26,9 +26,13 @@
     props:['product'],
     computed:{
       ...mapActions([
+        'handelDetail',
         'AddToCart',
-        'OpenModal'
+        'OpenModal',
       ])
+    },
+    methods:{
+
     }
   }
 </script>

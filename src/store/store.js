@@ -18,11 +18,17 @@ export default new Vuex.Store({
   getters:{
     products:(state)=>{
       return state.products;
-    }
+    },
+    detailProduct:(state)=>{
+      return state.detailProduct;
+    },
   },
   mutations: {
     setProducts:(state, products)=>{
       state.products=products;
+    },
+    handelDetail:(state, detailedProduct)=>{
+      state.detailProduct=detailedProduct;
     }
   },
   actions: {
@@ -34,6 +40,13 @@ export default new Vuex.Store({
       });
 
       commit('setProducts', tempProducts);
+    },
+    handelDetail:({commit, state}, id)=>{
+      const product= state.products.find((product) => {
+        return product.id === id;
+      });
+
+      commit('handelDetail', product);
     }
   }
 })

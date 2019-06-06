@@ -1,10 +1,51 @@
 <template>
+    <div class="container py-2">
+        <div class="row">
+            <div class="col-10 mx-auto my-5 text-center text-red">
+                <h1>{{detailProduct.title}}</h1>
+            </div>
 
+            <div class="row">
+                <div class="col-md-6 col-10 mx-auto my-3">
+                    <img v-bind:src="detailProduct.img" alt="Product image" class="img-fluid"/>
+                </div>
+
+                <div class="col-md-6 col-10 mx-auto text-capitalize">
+                    <h4 class="text-title mt-3 mb-2">Made by: {{detailProduct.company}}</h4>
+                    <h4 class="text-muted">Price: ${{detailProduct.price}}</h4>
+                    <p class="mt-3 mb-0"><u><b>Product Info:</b></u></p>
+                    <p class="text-muted">{{detailProduct.info}}</p>
+
+                    {{/*Buttons*/}}
+                    <div>
+                        <router-link to="/"><ButtonContainerDark>Back to Products</ButtonContainerDark></router-link>
+                        <ButtonContainerDark cart v-bind:disabled="detailProduct.inCart" v-on:click="AddToCart(detailProduct.id); OpenModal(detailProduct.id)">
+                            <span v-if="detailProduct.inCart">In Cart</span>
+                            <span v-else>Add to Cart</span>
+                        </ButtonContainerDark>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+  import {ButtonContainerDark} from '../components/styledComponentButtons';
+  import {mapActions} from 'vuex';
   export default {
-    name: 'Details'
+    components:{
+      ButtonContainerDark,
+    },
+    computed:{
+      ...mapActions([
+        'AddToCart',
+        'OpenModal',
+      ]),
+      detailProduct(){
+        return this.$store.getters.detailProduct;
+      }
+    }
   }
 </script>
 
