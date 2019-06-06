@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import ProductLists from './views/ProductLists.vue';
+import WatchLists from './views/WatchLists.vue';
 import Details from './views/Details.vue';
 import Cart from './views/Cart/Cart.vue';
 import PageNotFound from './views/PageNotFound.vue';
@@ -15,7 +15,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: ProductLists,
+      component: WatchLists,
     },
     {
       path:'/details',

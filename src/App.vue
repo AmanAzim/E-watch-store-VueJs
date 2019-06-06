@@ -2,14 +2,17 @@
   <div id="app">
     <NavBar/>
     <router-view/>
+    <Modal/>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
+import Modal from './components/Modal.vue';
 export default {
   components:{
     NavBar,
+    Modal
   }
 }
 </script>

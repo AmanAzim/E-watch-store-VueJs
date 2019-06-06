@@ -3,7 +3,7 @@
         <router-link to="/"><img v-bind:src="logo" alt="E-Handy Shop" class="myLogo navbar-brand"/></router-link>
         <ul class="navbar-nav align-items-center">
             <li class="nav-item ml-5">
-                <router-link to="/" class="nav-link">Products</router-link>
+                <router-link to="/" class="nav-link">Watches</router-link>
             </li>
         </ul>
 
@@ -15,7 +15,7 @@
 
 <script>
   import logo from '../logo.svg';
-  import {ButtonContainer} from '../../styledComponentButtons';
+  import {ButtonContainer} from './styledComponentButtons';
   import styled from 'vue-styled-components';
   const NavWrapper=styled.nav`
     background:var(--mainRed);
