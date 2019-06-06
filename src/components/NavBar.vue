@@ -17,8 +17,9 @@
   import logo from '../logo.svg';
   import {ButtonContainer} from './styledComponentButtons';
   import styled from 'vue-styled-components';
+
   const NavWrapper=styled.nav`
-    background:var(--mainRed);
+    background:var(--mainVue);
     .nav-link{
         color:var(--mainWhite) !important;
         font-size:1.3rem;

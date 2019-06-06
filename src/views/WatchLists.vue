@@ -4,7 +4,7 @@
             <Title name="Our" title="Collections"/>
 
             <div class="row">
-                <Watch v-for="(watch,index) in watchList" v-bind:watch="watch"></Watch>
+                <Watch v-for="(product,index) in products"  v-bind:product="product"></Watch>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
 <script>
   import Watch from './Watch.vue';
   import Title from '../components/Title.vue';
-  import {storeProducts} from '../data';
+  import {mapGetters} from 'vuex';
   export default {
     components:{
       Watch,
@@ -21,8 +21,12 @@
     },
     data(){
       return {
-        watchList:storeProducts,
       }
+    },
+    computed:{
+      ...mapGetters([
+        'products'
+      ])
     }
   }
 </script>

@@ -13,6 +13,9 @@ export default {
   components:{
     NavBar,
     Modal
+  },
+  created(){
+    this.$store.dispatch('setProducts');
   }
 }
 </script>
@@ -20,10 +23,10 @@ export default {
 <style>
   /*This is the way to setup css variables that we can use later with the name of the variable "var(--mainBlue)" like shown below in the body*/
   :root {
-    --mainRed:#41B883;
+    --mainVue:#41B883;
     --lightBlue:#009ffd ;
     --mainWhite:#f3f3f3;
-    --mainDark:#232528;
+    --mainDark:#34495e;
     --mainYellow: #ffb830;
     --lightGray:lightgray;
   }
@@ -40,8 +43,8 @@ export default {
     letter-spacing: 0.3rem;
 
   }
-  .text-red {
-    color: var(--mainRed);
+  .text-vue {
+    color: var(--mainVue);
   }
   .text-bright {
     color: var(--lightBlue);
@@ -57,7 +60,7 @@ export default {
     cursor: pointer;
   }
   .btn-black:hover {
-    background: var(--mainRed) !important;
+    background: var(--mainVue) !important;
     color: var(--mainWhite) !important;
   }
 
