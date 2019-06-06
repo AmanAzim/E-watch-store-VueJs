@@ -1,18 +1,24 @@
 <template>
   <div id="app">
     <NavBar/>
+
     <router-view/>
+
     <Modal/>
+
+    <Footer/>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue';
+import Footer from './components/Footer.vue';
 import Modal from './components/Modal.vue';
 export default {
   components:{
     NavBar,
-    Modal
+    Modal,
+    Footer
   },
   created(){
     this.$store.dispatch('setProducts');
@@ -29,6 +35,7 @@ export default {
     --mainDark:#34495e;
     --mainYellow: #ffb830;
     --lightGray:lightgray;
+    --mainBlack:#232528;
   }
 
   body{
@@ -37,17 +44,27 @@ export default {
     color: var(--mainDark) !important;
   }
 
-
+  .footer {
+    background-color: var(--mainVue);
+    height: 3rem;
+    width: auto;
+  }
   .text-title {
     font-family: 'Prosto One', cursive;
     letter-spacing: 0.3rem;
-
   }
   .text-vue {
     color: var(--mainVue);
   }
   .text-bright {
     color: var(--lightBlue);
+  }
+  .text-black {
+    color:var(--mainBlack);
+  }
+  .text-underline {
+    text-decoration: underline;
+    text-decoration-color: lightcoral;
   }
 
   .btn-black {
