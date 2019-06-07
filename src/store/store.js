@@ -24,6 +24,9 @@ export default new Vuex.Store({
     },
     modalProduct:(state)=>{
       return state.modalProduct;
+    },
+    cart:(state)=>{
+      return state.cart;
     }
   },
   mutations: {
@@ -48,6 +51,23 @@ export default new Vuex.Store({
     },
     closeModal:(state)=>{
       state.modalOpen=false;
+    },
+    increment:(state, cart)=>{
+      state.cart=cart;
+    },
+    decrement:(state, cart)=>{
+      state.cart=cart;
+    },
+    removeItem:(state, payLoad)=>{
+      state.products=payLoad.products;
+      state.cart=payLoad.cart;
+    },
+    clearCart:(state, tempProducts)=>{
+        state.products=tempProducts;
+        state.cartSubtotal=0;
+        state.cartTax=0;
+        state.cartTotal=0;
+        state.cart=[];
     }
   },
   actions: {
@@ -101,6 +121,63 @@ export default new Vuex.Store({
     },
     closeModal:({commit})=>{
       commit('closeModal');
+    },
+    increment:({commit, dispatch, state}, id)=>{
+      const tempCart=[...state.cart];
+      const index=tempCart.findIndex(item=>item.id===id);
+      const product=tempCart[index];
+      product.count++;
+      product.total +=product.price;
+
+      return new Promise(resolve=>{
+        resolve(commit('increment', tempCart));
+      }).then(()=>{
+        dispatch('addTotal');
+      })
+    },
+    decrement:({commit, dispatch, state}, id)=>{
+      const tempCart=[...state.cart];
+      const index=tempCart.findIndex(item=>item.id===id);
+      const product=tempCart[index];
+      product.count--;
+      product.total -=product.price;
+
+      if(product.count<=0){
+          dispatch('removeItem', id);
+      }else {
+
+          return new Promise(resolve=>{
+            resolve(commit('decrement', tempCart));
+          }).then(()=>{
+               dispatch('addTotal');
+          })
+      }
+    },
+    removeItem:({commit, dispatch, state}, id)=>{
+      const tempProducts=[...state.products];
+      const index=tempProducts.findIndex(item=>item.id===id);
+      const product=tempProducts[index];
+      product.inCart=false;
+      product.count=0;
+      product.total=0;
+
+      let tempCart=state.cart.filter(item=>item.id!==id);
+
+      return new Promise(resolve=>{
+          resolve( commit('removeItem', {products:tempProducts, cart:tempCart}) );
+      }).then(()=>{
+          dispatch('addTotal');
+      })
+    },
+    clearCart:({commit, state})=>{
+      let tempProducts=[...state.products];
+      tempProducts.map(item=>{
+        item.inCart=false;
+        item.count=0;
+        item.total=0;
+      });
+
+      commit('clearCart', tempProducts);
     }
   }
 })
