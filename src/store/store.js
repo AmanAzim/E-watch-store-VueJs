@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {storeProducts, detailProduct} from '../data';
+import axios from 'axios';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     products:[],
-    detailedProduct:{...detailProduct},
+    detailedProduct:null,
     cart:[],
     modalOpen:false,
-    modalProduct:{...detailProduct},
+    modalProduct:null,
     cartSubtotal:0,
     cartTax:0,
     cartTotal:0,
@@ -73,12 +74,20 @@ export default new Vuex.Store({
   actions: {
     setProducts:({commit})=>{
       let tempProducts=[];
-      storeProducts.forEach(item=>{
+      /*
+        storeProducts.forEach(item=>{
         const tempItem={...item};
         tempProducts=[...tempProducts, tempItem];
-      });
-
-      commit('setProducts', tempProducts);
+        });
+      */
+      //commit('setProducts', tempProducts);
+      const Http = new Vue;
+      axios.get('https://e-handy-store.firebaseio.com/storeProducts.json')
+        .then(res=>{
+          tempProducts=res.data;
+          console.log('serveradata',tempProducts);
+          commit('setProducts', tempProducts);
+        }).catch(err=>console.log(err));
     },
     handelDetail:({commit, state}, id)=>{
       const product=state.products.find(product=>product.id===id);
