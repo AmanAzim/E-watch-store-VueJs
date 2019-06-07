@@ -22,7 +22,7 @@
     background:var(--mainVue);
     .nav-link{
         color:var(--mainWhite) !important;
-        font-size:1.3rem;
+        font-size:1.5rem;
     }
 `;
 

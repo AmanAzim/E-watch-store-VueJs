@@ -22,6 +22,9 @@ export default new Vuex.Store({
     detailedProduct:(state)=>{
       return state.detailedProduct;
     },
+    modalProduct:(state)=>{
+      return state.modalProduct;
+    }
   },
   mutations: {
     setProducts:(state, products)=>{
@@ -42,6 +45,9 @@ export default new Vuex.Store({
     openModal:(state, modalProduct)=>{
       state.modalProduct=modalProduct;
       state.modalOpen=true;
+    },
+    closeModal:(state)=>{
+      state.modalOpen=false;
     }
   },
   actions: {
@@ -92,6 +98,9 @@ export default new Vuex.Store({
     openModal:({commit, state}, id)=>{
       const modalProduct=state.products.find(product=>product.id===id);
       commit('openModal', modalProduct);
+    },
+    closeModal:({commit})=>{
+      commit('closeModal');
     }
   }
 })

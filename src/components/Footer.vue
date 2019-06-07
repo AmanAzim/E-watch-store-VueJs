@@ -1,5 +1,7 @@
 <template>
-    <div class="footer"></div>
+    <div class="footer">
+        <p>&copy; Copyright Aman Azim</p>
+    </div>
 </template>
 
 <script>

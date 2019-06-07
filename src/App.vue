@@ -2,9 +2,11 @@
   <div id="app">
     <NavBar/>
 
-    <router-view/>
+    <div class="conditional-content">
+        <router-view/>
 
-    <Modal/>
+        <Modal/>
+    </div>
 
     <Footer/>
   </div>
@@ -43,11 +45,22 @@ export default {
     background: var(--mainWhite) !important;
     color: var(--mainDark) !important;
   }
+  .conditional-content {
+    min-height: 34rem;
+  }
 
   .footer {
     background-color: var(--mainVue);
     height: 3rem;
-    width: auto;
+    width: 100%;
+    text-align: center;
+    display: table;
+  }
+  .footer p {
+    font-size: 1rem ;
+    text-align:center;
+    display: table-cell;
+    vertical-align: middle;
   }
   .text-title {
     font-family: 'Prosto One', cursive;
@@ -86,5 +99,8 @@ export default {
     font-size: 1.2rem;
     color: var(--mainYellow);
   }
-
+  .page-fill {
+    margin-top: 100%;
+    margin-bottom: 100%;
+  }
 </style>
