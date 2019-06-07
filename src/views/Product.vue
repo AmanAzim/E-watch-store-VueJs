@@ -2,7 +2,7 @@
     <div class="col-lg-3 col-md-6 col-9 mx-auto my-3">
         <div class="card">
 
-            <div class="img-container py-5" v-on:click="onHandelDetail(product.id)">
+            <div class="img-container py-5" v-on:click="handelDetail(product.id)">
                 <router-link to="/details"><img v-bind:src="product.img" alt="product" class="card-img-top"/></router-link>
 
                 <button class="cart-btn" v-bind:disabled="product.inCart" v-on:click="addToCart(product.id); openModal(product.id)">
@@ -24,17 +24,12 @@
   import {mapActions} from 'vuex';
   export default {
     props:['product'],
-    computed:{
+    methods:{
       ...mapActions([
         'handelDetail',
         'addToCart',
         'openModal',
       ])
-    },
-    methods:{
-      onHandelDetail(id){
-        this.$store.dispatch('handelDetail', id);
-      }
     }
   }
 </script>

@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products:[],
-    detailProduct:{...detailProduct},
+    detailedProduct:{...detailProduct},
     cart:[],
     modalOpen:false,
     modalProduct:{...detailProduct},
@@ -19,8 +19,8 @@ export default new Vuex.Store({
     products:(state)=>{
       return state.products;
     },
-    detailProduct:(state)=>{
-      return state.detailProduct;
+    detailedProduct:(state)=>{
+      return state.detailedProduct;
     },
   },
   mutations: {
@@ -28,16 +28,20 @@ export default new Vuex.Store({
       state.products=products;
     },
     handelDetail:(state, detailedProduct)=>{
-      state.detailProduct=detailedProduct;
+      state.detailedProduct=detailedProduct;
     },
-    addToCart:(state, tempProduct, product)=>{
-      state.products=tempProduct;
-      state.cart=[...state.cart, product];
+    addToCart:(state, payLoad)=>{
+      state.products=payLoad.tempProducts;
+      state.cart=[...state.cart, payLoad.product];
     },
-    addTotal:(state, subTotal, tempTax, total)=>{
-      state.cartSubtotal=subTotal;
-      state.cartTax=tempTax;
-      state.cartTotal=total;
+    addTotal:(state, payLoad)=>{
+      state.cartSubtotal=payLoad.subTotal;
+      state.cartTax=payLoad.tempTax;
+      state.cartTotal=payLoad.total;
+    },
+    openModal:(state, modalProduct)=>{
+      state.modalProduct=modalProduct;
+      state.modalOpen=true;
     }
   },
   actions: {
@@ -51,26 +55,25 @@ export default new Vuex.Store({
       commit('setProducts', tempProducts);
     },
     handelDetail:({commit, state}, id)=>{
-      const product= state.products.find((product) => {
-        return product.id === id;
-      });
+      const product=state.products.find(product=>product.id===id);
 
       commit('handelDetail', product);
     },
     addToCart:({commit, dispatch, state}, id)=>{
-      let tempProducts=[...store.products];
+      let tempProducts=[...state.products];
       let index=tempProducts.findIndex(product=>product.id===id);
       let product=tempProducts[index];
 
       product.inCart=true;
       product.count=1;
       product.total=product.price;
-      console.log('tempProducts',tempProducts);
+
       //1st way of making Promise
-      return new Promise((resolve)=>{
-        if(commit('addToCart', tempProducts, product)){
-          resolve(dispatch('addTotal'))
-        }
+      let p=new Promise((resolve)=>{
+          resolve( commit('addToCart', {tempProducts:tempProducts, product:product}) );
+      })
+        p.then(()=>{
+          dispatch('addTotal')
       })
     },
     addTotal:({commit, state})=>{
@@ -84,7 +87,11 @@ export default new Vuex.Store({
 
       let total=subTotal+tempTax;
 
-      commit('addTotal', subTotal, tempTax, total)
+      commit('addTotal', {subTotal:subTotal, tempTax:tempTax, total:total})
+    },
+    openModal:({commit, state}, id)=>{
+      const modalProduct=state.products.find(product=>product.id===id);
+      commit('openModal', modalProduct);
     }
   }
 })

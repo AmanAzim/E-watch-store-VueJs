@@ -4,19 +4,19 @@
             <Title name="Our" title="Collections"/>
 
             <div class="row">
-                <Watch v-for="(product,index) in products"  v-bind:product="product"></Watch>
+                <Product v-for="(product,index) in products"  v-bind:product="product"></Product>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-  import Watch from './Watch.vue';
+  import Product from './Product.vue';
   import Title from '../components/Title.vue';
   import {mapGetters} from 'vuex';
   export default {
     components:{
-      Watch,
+      Product,
       Title
     },
     data(){
