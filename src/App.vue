@@ -34,7 +34,7 @@ export default {
     --mainVue:#41B883;
     --lightBlue:#009ffd ;
     --mainWhite:#f3f3f3;
-    --mainDark:#34495e;
+    --mainDark:#003366;
     --mainYellow: #ffb830;
     --lightGray:lightgray;
     --mainBlack:#232528;
@@ -72,9 +72,7 @@ export default {
   .text-bright {
     color: var(--lightBlue);
   }
-  .text-black {
-    color:var(--mainBlack);
-  }
+
   .text-underline {
     text-decoration: underline;
     text-decoration-color: lightcoral;
