@@ -14,6 +14,7 @@
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
+    "vue-paypal-checkout": "^3.2.0",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.3",
     "vue-styled-components": "^1.4.5",
