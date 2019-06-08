@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <NavBar/>
 
     <div class="conditional-content">
@@ -9,6 +10,7 @@
     </div>
 
     <Footer/>
+
   </div>
 </template>
 
@@ -16,11 +18,12 @@
 import NavBar from './components/NavBar.vue';
 import Footer from './components/Footer.vue';
 import Modal from './components/Modal.vue';
+
 export default {
   components:{
     NavBar,
     Modal,
-    Footer
+    Footer,
   },
   created(){
     this.$store.dispatch('setProducts');
