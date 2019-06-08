@@ -13,7 +13,7 @@
 
             <div class="card-footer d-flex justify-content-between">
                 <p class="align-self-center mb-0">{{product.title}}</p>
-                <h5 class="text-vue mb-0"><span class="mr-1">$</span>{{product.price}}</h5>
+                <h5 class="text-vue mb-0"><span class="mr-1">€</span>{{product.price}}</h5>
             </div>
 
         </div>

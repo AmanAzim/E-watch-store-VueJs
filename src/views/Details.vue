@@ -12,7 +12,7 @@
 
                 <div class="col-md-6 col-10 mx-auto text-capitalize">
                     <h4 class="text-title mt-3 mb-2">Made by: {{detailedProduct.company}}</h4>
-                    <h4 class="text-muted">Price: ${{detailedProduct.price}}</h4>
+                    <h4 class="text-muted">Price: €{{detailedProduct.price}}</h4>
                     <p class="mt-3 mb-0"><u><b>Product Info:</b></u></p>
                     <p class="text-muted">{{detailedProduct.info}}</p>
 

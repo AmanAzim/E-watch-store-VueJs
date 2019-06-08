@@ -12,7 +12,7 @@
 
         {{/*Price Col*/}}
         <div class="col-10 col-lg-2 mx-auto">
-            <span class="d-lg-none">Price: </span ><b>${{item.price}}</b>
+            <span class="d-lg-none">Price: </span ><b>€{{item.price}}</b>
         </div>
 
         {{/*Quantity button Col*/}}
@@ -33,7 +33,7 @@
 
         {{/*Total Col*/}}
         <div class="col-10 col-lg-2 mx-auto">
-            <b>Item total : ${{item.total}}</b>
+            <b>Item total : €{{item.total}}</b>
         </div>
     </div>
 </template>
