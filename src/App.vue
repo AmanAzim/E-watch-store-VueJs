@@ -1,17 +1,14 @@
 <template>
-  <div id="app">
+    <div id="app">
+        <NavBar/>
 
-    <NavBar/>
+        <div class="conditional-content">
+            <router-view/>
+            <Modal/>
+        </div>
 
-    <div class="conditional-content">
-        <router-view/>
-
-        <Modal/>
+        <Footer/>
     </div>
-
-    <Footer/>
-
-  </div>
 </template>
 
 <script>
@@ -51,7 +48,11 @@ export default {
   .conditional-content {
     min-height: 34rem;
   }
-
+  @media only screen and (min-width: 1600px) {
+      .conditional-content {
+          min-height: 45rem;
+      }
+  }
   .footer {
     background-color: var(--mainVue);
     height: 3rem;

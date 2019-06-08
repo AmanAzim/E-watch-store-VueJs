@@ -73,7 +73,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setProducts:({commit})=>{
+    setProducts:({commit, dispatch})=>{
       let tempProducts=[];
       /*
         storeProducts.forEach(item=>{
@@ -85,15 +85,26 @@ export default new Vuex.Store({
       //axios.put('https://e-watch-store.firebaseio.com/storeWatches.json', tempProducts);
         axios.get('https://e-watch-store.firebaseio.com/storeWatches.json')
         .then(res=>{
-          tempProducts=res.data;
-          console.log('serveradata',tempProducts);
-          commit('setProducts', tempProducts);
+            tempProducts=res.data;
+            commit('setProducts', tempProducts);
+            console.log('serveradata',tempProducts);
+        }).then(()=>{
+              dispatch('loadDetailOnReload')
         }).catch(err=>console.log(err));
     },
     handelDetail:({commit, state}, id)=>{
-      const product=state.products.find(product=>product.id===id);
-
+      let product=state.products.find(product=>product.id===id);
       commit('handelDetail', product);
+      let index=state.products.findIndex(product=>product.id===id);
+      localStorage.setItem('detailProductIndex', index);
+    },
+    loadDetailOnReload:({commit, dispatch, state})=>{
+      if(state.detailedProduct!==null){
+        return;
+      }else {
+        const index=localStorage.getItem('detailProductIndex');
+        commit('handelDetail', state.products[index])
+      }
     },
     addToCart:({commit, dispatch, state}, id)=>{
       let tempProducts=[...state.products];
@@ -191,6 +202,7 @@ export default new Vuex.Store({
     },
     paymentComplete:({dispatch})=>{
       dispatch('clearCart');
+      localStorage.removeItem('detailProductIndex');
       router.replace('/');
     }
   }

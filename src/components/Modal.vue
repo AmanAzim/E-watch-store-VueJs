@@ -19,7 +19,7 @@
 
                        <router-link to="/cart"><ButtonContainerDark cart v-on:click="onCloseModal()">Go to Cart</ButtonContainerDark></router-link>
                    </div>
-               </div>
+                </div>
              </div>
            </div>
         </transition>
