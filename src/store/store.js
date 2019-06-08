@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {storeProducts, detailProduct} from '../data';
 import axios from 'axios';
+import router from '../router';
 
 Vue.use(Vuex)
 
@@ -187,6 +188,10 @@ export default new Vuex.Store({
       });
 
       commit('clearCart', tempProducts);
+    },
+    paymentComplete:({dispatch})=>{
+      dispatch('clearCart');
+      router.replace('/');
     }
   }
 })

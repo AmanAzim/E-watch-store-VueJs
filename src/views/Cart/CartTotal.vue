@@ -7,7 +7,12 @@
                 <h5><span class="text-title">Tax : </span><b>€{{$store.state.cartTax}}</b></h5>
                 <h5><span class="text-title">Cart Total : </span><b>€{{$store.state.cartTotal}}</b></h5>
 
-                <PayPalButton :amount="$store.state.cartTotal" currency="EUR" :client="credentials" env="sandbox"></PayPalButton>
+                <PayPalButton
+                        :amount="$store.state.cartTotal"
+                        currency="EUR" :client="credentials"
+                        @payment-completed="paymentComplete()"
+                        env="sandbox">
+                </PayPalButton>
             </div>
         </div>
     </div>
@@ -30,6 +35,9 @@
     methods:{
       clearCart(){
         this.$store.dispatch('clearCart');
+      },
+      paymentComplete(){
+        this.$store.dispatch('paymentComplete');
       }
     },
     created(){
