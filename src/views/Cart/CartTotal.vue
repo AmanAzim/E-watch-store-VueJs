@@ -23,7 +23,7 @@
       return {
         credentials: {
           sandbox: process.env.VUE_APP_PAYPAL_ID,
-          production: '<production client id>'
+          production: 'YOUR-PRODUCTION-APP-ID'
         },
       }
     },
