@@ -8,7 +8,7 @@
                 <h5><span class="text-title">Cart Total : </span><b>€{{$store.state.cartTotal}}</b></h5>
 
                 <PayPalButton
-                        :amount="$store.state.cartTotal"
+                        :amount="totalAmount"
                         currency="EUR" :client="credentials"
                         @payment-completed="paymentComplete()"
                         env="sandbox">
@@ -30,6 +30,11 @@
           sandbox: process.env.VUE_APP_PAYPAL_ID,
           production: 'YOUR-PRODUCTION-APP-ID'
         },
+      }
+    },
+    computed:{
+      totalAmount(){
+        return this.$store.state.cartTotal;
       }
     },
     methods:{
