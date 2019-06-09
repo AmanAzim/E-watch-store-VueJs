@@ -38,6 +38,13 @@ export default new Vuex.Store({
     handelDetail:(state, detailedProduct)=>{
       state.detailedProduct=detailedProduct;
     },
+    loadCartOnReload:(state, payLoad)=>{
+      state.products=payLoad.tempProducts;
+      state.cart=payLoad.tempCart;
+      state.cartSubtotal=payLoad.cartSubtotal;
+      state.cartTax=payLoad.cartTax;
+      state.cartTotal=payLoad.cartTotal;
+    },
     addToCart:(state, payLoad)=>{
       state.products=payLoad.tempProducts;
       state.cart=[...state.cart, payLoad.product];
@@ -75,6 +82,7 @@ export default new Vuex.Store({
   actions: {
     setProducts:({commit, dispatch})=>{
       let tempProducts=[];
+      //commit('setProducts', tempProducts);
       /*
         storeProducts.forEach(item=>{
         const tempItem={...item};
@@ -82,14 +90,15 @@ export default new Vuex.Store({
         });
         commit('setProducts', tempProducts);
       */
-      //axios.put('https://e-watch-store.firebaseio.com/storeWatches.json', tempProducts);
-        axios.get('https://e-watch-store.firebaseio.com/storeWatches.json')
+      //axios.put('https://e-handy-store.firebaseio.com/storeWatches.json', storeProducts);
+        axios.get('https://e-handy-store.firebaseio.com/storeWatches.json')
         .then(res=>{
             tempProducts=res.data;
             commit('setProducts', tempProducts);
             console.log('serveradata',tempProducts);
         }).then(()=>{
-              dispatch('loadDetailOnReload')
+              dispatch('loadDetailOnReload');
+              dispatch('loadCartOnReload');
         }).catch(err=>console.log(err));
     },
     handelDetail:({commit, state}, id)=>{
@@ -106,8 +115,36 @@ export default new Vuex.Store({
         commit('handelDetail', state.products[index])
       }
     },
+    loadCartOnReload:({commit, dispatch, state})=>{
+      let stringToArr=localStorage.getItem('cart');
+      const tempCart=JSON.parse(stringToArr);
+
+      let tempProducts=[];
+      state.products.forEach((item)=>{
+        const singleItem={...item};
+        tempProducts=[...tempProducts, singleItem];
+      });
+      //Because we need to also change the main products list after reloading the cart from local storage or after reloading even though a item will be in the cart but in the main products list showed it will appear as new means with "inCart=false" and "count=0"
+      for(let i=0; i<tempProducts.length; i++){
+        for(let j=0; j<tempCart.length;j++){
+          if(tempCart[j].id===tempProducts[i].id){
+            tempProducts[i]={...tempCart[j]};
+            break;
+          }
+        }
+      }
+      const cartSubtotal=localStorage.getItem('cartSubtotal');
+      const cartTax=localStorage.getItem('cartTax');
+      const cartTotal=localStorage.getItem('cartTotal');
+
+      commit('loadCartOnReload', {tempProducts, tempCart, cartSubtotal, cartTax, cartTotal});
+    },
     addToCart:({commit, dispatch, state}, id)=>{
-      let tempProducts=[...state.products];
+      let tempProducts=[];
+      state.products.forEach((item)=>{
+        const singleItem={...item};
+        tempProducts=[...tempProducts, singleItem];
+      });
       let index=tempProducts.findIndex(product=>product.id===id);
       let product=tempProducts[index];
 
@@ -121,7 +158,9 @@ export default new Vuex.Store({
       })
         p.then(()=>{
           dispatch('addTotal')
-      })
+        }).then(()=>{
+          dispatch('saveCartOnBrowser');
+        })
     },
     addTotal:({commit, state})=>{
       let subTotal=0;
@@ -154,6 +193,8 @@ export default new Vuex.Store({
         resolve(commit('increment', tempCart));
       }).then(()=>{
         dispatch('addTotal');
+      }).then(()=>{
+        dispatch('saveCartOnBrowser');
       })
     },
     decrement:({commit, dispatch, state}, id)=>{
@@ -171,11 +212,17 @@ export default new Vuex.Store({
             resolve(commit('decrement', tempCart));
           }).then(()=>{
                dispatch('addTotal');
+          }).then(()=>{
+            dispatch('saveCartOnBrowser');
           })
       }
     },
     removeItem:({commit, dispatch, state}, id)=>{
-      const tempProducts=[...state.products];
+      let tempProducts=[];
+      state.products.forEach((item)=>{
+        const singleItem={...item};
+        tempProducts=[...tempProducts, singleItem];
+      });
       const index=tempProducts.findIndex(item=>item.id===id);
       const product=tempProducts[index];
       product.inCart=false;
@@ -188,22 +235,42 @@ export default new Vuex.Store({
           resolve( commit('removeItem', {products:tempProducts, cart:tempCart}) );
       }).then(()=>{
           dispatch('addTotal');
+      }).then(()=>{
+        dispatch('saveCartOnBrowser');
       })
     },
-    clearCart:({commit, state})=>{
-      let tempProducts=[...state.products];
+    clearCart:({commit, dispatch, state})=>{
+      let tempProducts=[];
+      state.products.forEach((item)=>{
+        const singleItem={...item};
+        tempProducts=[...tempProducts, singleItem];
+      });
       tempProducts.map(item=>{
         item.inCart=false;
         item.count=0;
         item.total=0;
       });
-
+      dispatch('cleanBrowserStorage');
       commit('clearCart', tempProducts);
     },
     paymentComplete:({dispatch})=>{
       dispatch('clearCart');
       localStorage.removeItem('detailProductIndex');
       router.replace('/');
+    },
+    saveCartOnBrowser:({state})=>{
+      const StringCart=JSON.stringify(state.cart)
+      localStorage.setItem('cart', StringCart);
+      localStorage.setItem('cartSubtotal', state.cartSubtotal);
+      localStorage.setItem('cartTax', state.cartTax);
+      localStorage.setItem('cartTotal', state.cartTotal);
+    },
+    cleanBrowserStorage(){
+      localStorage.removeItem('cart');
+      localStorage.removeItem('cartSubtotal');
+      localStorage.removeItem('cartTax');
+      localStorage.removeItem('cartTotal');
+      localStorage.removeItem('detailProductIndex');
     }
   }
 })

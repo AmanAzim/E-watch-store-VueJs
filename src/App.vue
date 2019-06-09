@@ -24,6 +24,9 @@ export default {
   },
   created(){
     this.$store.dispatch('setProducts');
+  },
+  beforeDestroy(){
+    this.$store.dispatch('cleanBrowserStorage');
   }
 }
 </script>

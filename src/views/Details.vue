@@ -47,9 +47,6 @@
         'addToCart',
         'openModal',
       ]),
-    },
-    created(){
-     // this.$store.dispatch('loadDetailOnReload');
     }
   }
 </script>
