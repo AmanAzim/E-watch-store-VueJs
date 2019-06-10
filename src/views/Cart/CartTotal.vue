@@ -33,19 +33,19 @@ export default {
     }
   },
   computed: {
-    totalAmount () {
+    totalAmount() {
       return this.$store.state.cartTotal
     }
   },
   methods: {
-    clearCart () {
+    clearCart() {
       this.$store.dispatch('clearCart')
     },
-    paymentComplete () {
+    paymentComplete() {
       this.$store.dispatch('paymentComplete')
     }
   },
-  created () {
+  created() {
     // console.log('env',process.env.VUE_APP_PAYPAL_ID)
   }
 }
