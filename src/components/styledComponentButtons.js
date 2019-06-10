@@ -18,8 +18,8 @@ export const ButtonContainer = styled.button`
         outline:none;
     }      
 `
-
-export const ButtonContainerDark = styled.button`
+const btnProps = { cart: Boolean };
+export const ButtonContainerDark = styled('button', btnProps)`
     background:${props => props.cart ? 'var(--mainWhite)' : 'var(--mainVue)'};
     font-size:1.2rem;
     border:0.05rem solid var(--mainWhite);

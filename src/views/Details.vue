@@ -19,7 +19,7 @@
                     {{/*Buttons*/}}
                     <div>
                         <router-link to="/"><ButtonContainerDark>Back to Products</ButtonContainerDark></router-link>
-                        <ButtonContainerDark v-bind:disabled="detailedProduct.inCart" v-on:click="addToCart(detailedProduct.id); openModal(detailedProduct.id)">
+                        <ButtonContainerDark cart v-bind:disabled="detailedProduct.inCart" v-on:click="addToCart(detailedProduct.id); openModal(detailedProduct.id)">
                             <span v-if="detailedProduct.inCart">In Cart</span>
                             <span v-else>Add to Cart</span>
                         </ButtonContainerDark>
