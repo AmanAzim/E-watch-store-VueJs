@@ -29,24 +29,24 @@
 </template>
 
 <script>
-  import {ButtonContainerDark} from '../components/styledComponentButtons';
-  import BackDrop from './Backdrop.vue';
-  export default {
-    components:{
-      ButtonContainerDark,
-      BackDrop
-    },
-    computed:{
-      modalProduct(){
-        return this.$store.getters.modalProduct;
-      }
-    },
-    methods:{
-      onCloseModal(){
-        this.$store.dispatch('closeModal');
-      }
+import { ButtonContainerDark } from '../components/styledComponentButtons'
+import BackDrop from './Backdrop.vue'
+export default {
+  components: {
+    ButtonContainerDark,
+    BackDrop
+  },
+  computed: {
+    modalProduct () {
+      return this.$store.getters.modalProduct
+    }
+  },
+  methods: {
+    onCloseModal () {
+      this.$store.dispatch('closeModal')
     }
   }
+}
 </script>
 
 <style scoped>

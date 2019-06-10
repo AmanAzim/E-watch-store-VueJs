@@ -11,24 +11,24 @@
 </template>
 
 <script>
-  import Product from './Product.vue';
-  import Title from '../components/Title.vue';
-  import {mapGetters} from 'vuex';
-  export default {
-    components:{
-      Product,
-      Title
-    },
-    data(){
-      return {
-      }
-    },
-    computed:{
-      ...mapGetters([
-        'products'
-      ])
+import Product from './Product.vue'
+import Title from '../components/Title.vue'
+import { mapGetters } from 'vuex'
+export default {
+  components: {
+    Product,
+    Title
+  },
+  data () {
+    return {
     }
+  },
+  computed: {
+    ...mapGetters([
+      'products'
+    ])
   }
+}
 </script>
 
 <style scoped>

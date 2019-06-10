@@ -5,17 +5,17 @@
 </template>
 
 <script>
-  import CartItem from './CartItem.vue';
-  export default {
-    components:{
-      CartItem,
-    },
-    computed:{
-        cart(){
-          return this.$store.getters.cart;
-        }
+import CartItem from './CartItem.vue'
+export default {
+  components: {
+    CartItem
+  },
+  computed: {
+    cart () {
+      return this.$store.getters.cart
     }
   }
+}
 </script>
 
 <style scoped>

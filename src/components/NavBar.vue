@@ -14,29 +14,29 @@
 </template>
 
 <script>
-  import logo from '../logo.svg';
-  import {ButtonContainer} from './styledComponentButtons';
-  import styled from 'vue-styled-components';
+import logo from '../logo.svg'
+import { ButtonContainer } from './styledComponentButtons'
+import styled from 'vue-styled-components'
 
-  const NavWrapper=styled.nav`
+const NavWrapper = styled.nav`
     background:var(--mainVue);
     .nav-link{
         color:var(--mainWhite) !important;
         font-size:1.5rem;
     }
-`;
+`
 
-  export default {
-    components:{
-      NavWrapper,
-      ButtonContainer
-    },
-    data(){
-      return {
-        logo:logo
-      }
+export default {
+  components: {
+    NavWrapper,
+    ButtonContainer
+  },
+  data () {
+    return {
+      logo: logo
     }
   }
+}
 </script>
 
 <style scoped>

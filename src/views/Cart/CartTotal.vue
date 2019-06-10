@@ -19,36 +19,36 @@
 </template>
 
 <script>
-  import PayPalButton from 'vue-paypal-checkout';
-  export default {
-    components:{
-      PayPalButton,
-    },
-    data(){
-      return {
-        credentials: {
-          sandbox: process.env.VUE_APP_PAYPAL_ID,
-          production: 'YOUR-PRODUCTION-APP-ID'
-        },
+import PayPalButton from 'vue-paypal-checkout'
+export default {
+  components: {
+    PayPalButton
+  },
+  data () {
+    return {
+      credentials: {
+        sandbox: process.env.VUE_APP_PAYPAL_ID,
+        production: 'YOUR-PRODUCTION-APP-ID'
       }
-    },
-    computed:{
-      totalAmount(){
-        return this.$store.state.cartTotal;
-      }
-    },
-    methods:{
-      clearCart(){
-        this.$store.dispatch('clearCart');
-      },
-      paymentComplete(){
-        this.$store.dispatch('paymentComplete');
-      }
-    },
-    created(){
-      //console.log('env',process.env.VUE_APP_PAYPAL_ID)
     }
+  },
+  computed: {
+    totalAmount () {
+      return this.$store.state.cartTotal
+    }
+  },
+  methods: {
+    clearCart () {
+      this.$store.dispatch('clearCart')
+    },
+    paymentComplete () {
+      this.$store.dispatch('paymentComplete')
+    }
+  },
+  created () {
+    // console.log('env',process.env.VUE_APP_PAYPAL_ID)
   }
+}
 </script>
 
 <style scoped>

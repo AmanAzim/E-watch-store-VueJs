@@ -39,17 +39,17 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
-  export default {
-    props:['item'],
-    methods:{
-      ...mapActions([
-        'increment',
-        'decrement',
-        'removeItem'
-      ]),
-    }
+import { mapActions } from 'vuex'
+export default {
+  props: ['item'],
+  methods: {
+    ...mapActions([
+      'increment',
+      'decrement',
+      'removeItem'
+    ])
   }
+}
 </script>
 
 <style scoped>

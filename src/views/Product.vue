@@ -21,17 +21,17 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex';
-  export default {
-    props:['product'],
-    methods:{
-      ...mapActions([
-        'handelDetail',
-        'addToCart',
-        'openModal',
-      ])
-    }
+import { mapActions } from 'vuex'
+export default {
+  props: ['product'],
+  methods: {
+    ...mapActions([
+      'handelDetail',
+      'addToCart',
+      'openModal'
+    ])
   }
+}
 </script>
 
 <style scoped>

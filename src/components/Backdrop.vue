@@ -5,14 +5,14 @@
 </template>
 
 <script>
-  export default {
-    props:['show'],
-    data(){
-      return {
-        backDropClasses:['Backdrop', this.show? 'BackdropOpen':'BackdropClose']
-      }
+export default {
+  props: ['show'],
+  data () {
+    return {
+      backDropClasses: ['Backdrop', this.show ? 'BackdropOpen' : 'BackdropClose']
     }
   }
+}
 </script>
 
 <style scoped>

@@ -31,24 +31,24 @@
 </template>
 
 <script>
-  import {ButtonContainerDark} from '../components/styledComponentButtons';
-  import {mapActions} from 'vuex';
-  export default {
-    components:{
-      ButtonContainerDark,
-    },
-    computed:{
-      detailedProduct(){
-        return this.$store.getters.detailedProduct;
-      }
-    },
-    methods:{
-      ...mapActions([
-        'addToCart',
-        'openModal',
-      ]),
+import { ButtonContainerDark } from '../components/styledComponentButtons'
+import { mapActions } from 'vuex'
+export default {
+  components: {
+    ButtonContainerDark
+  },
+  computed: {
+    detailedProduct () {
+      return this.$store.getters.detailedProduct
     }
+  },
+  methods: {
+    ...mapActions([
+      'addToCart',
+      'openModal'
+    ])
   }
+}
 </script>
 
 <style scoped>
