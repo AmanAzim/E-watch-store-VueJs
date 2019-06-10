@@ -10,7 +10,7 @@
                 <PayPalButton
                         :amount="totalAmount"
                         currency="EUR" :client="credentials"
-                        @payment-completed="paymentComplete()"
+                        @payment-completed="paymentComplete"
                         env="sandbox">
                 </PayPalButton>
             </div>
