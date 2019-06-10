@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-2">
+    <div class="container py-2" :key="$store.state.detailedProduct">
         <div class="row">
             <div class="col-10 mx-auto my-5 text-center text-vue text-underline">
                 <h1>{{detailedProduct.title}}</h1>

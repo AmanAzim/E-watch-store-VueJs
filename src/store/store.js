@@ -22,7 +22,7 @@ export default new Vuex.Store({
       return state.products
     },
     detailedProduct: (state) => {
-      return state.detailedProduct
+      return state.detailedProduct;
     },
     modalProduct: (state) => {
       return state.modalProduct
@@ -109,7 +109,7 @@ export default new Vuex.Store({
     },
     loadDetailOnReload: ({ commit, dispatch, state }) => {
       if (state.detailedProduct !== null) {
-
+        return;
       } else {
         const index = localStorage.getItem('detailProductIndex')
         commit('handelDetail', state.products[index])
@@ -140,18 +140,17 @@ export default new Vuex.Store({
       commit('loadCartOnReload', { tempProducts, tempCart, cartSubtotal, cartTax, cartTotal })
     },
     addToCart: ({ commit, dispatch, state }, id) => {
-      let tempProducts = []
-      state.products.forEach((item) => {
+      let tempProducts =[...state.products]
+      /*state.products.forEach((item) => { //Don't do Immutably Copy where it is unnecessary because It cause delay on updating
         const singleItem = { ...item }
         tempProducts = [...tempProducts, singleItem]
-      })
+      })*/
       let index = tempProducts.findIndex(product => product.id === id)
       let product = tempProducts[index]
 
       product.inCart = true
       product.count = 1
       product.total = product.price
-
       // 1st way of making Promise
       let p = new Promise((resolve) => {
         resolve(commit('addToCart', { tempProducts: tempProducts, product: product }))
@@ -217,11 +216,7 @@ export default new Vuex.Store({
       }
     },
     removeItem: ({ commit, dispatch, state }, id) => {
-      let tempProducts = []
-      state.products.forEach((item) => {
-        const singleItem = { ...item }
-        tempProducts = [...tempProducts, singleItem]
-      })
+      let tempProducts = [...state.products];
       const index = tempProducts.findIndex(item => item.id === id)
       const product = tempProducts[index]
       product.inCart = false
@@ -239,11 +234,7 @@ export default new Vuex.Store({
       })
     },
     clearCart: ({ commit, dispatch, state }) => {
-      let tempProducts = []
-      state.products.forEach((item) => {
-        const singleItem = { ...item }
-        tempProducts = [...tempProducts, singleItem]
-      })
+      let tempProducts = [...state.products];
       tempProducts.map(item => {
         item.inCart = false
         item.count = 0
