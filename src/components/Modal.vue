@@ -7,7 +7,7 @@
                    <div class="col-8 col-md-6 col-lg-4 p-5 mx-auto text-center" id="modal">
                        <h5>Item added to the cart</h5>
 
-                       <img v-bind:src="modalProduct.img" class="img-fluid" alt="Product Image"></img>
+                       <img v-bind:src="modalProduct.imgUrl" class="img-fluid" alt="Product Image"></img>
 
                        <h5>{{modalProduct.title}}</h5>
 

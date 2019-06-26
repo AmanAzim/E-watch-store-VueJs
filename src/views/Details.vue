@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-md-6 col-10 mx-auto my-3">
-                    <img v-bind:src="detailedProduct.img" alt="Product image" class="img-fluid"/>
+                    <img v-bind:src="detailedProduct.imgUrl" alt="Product image" class="img-fluid"/>
                 </div>
 
                 <div class="col-md-6 col-10 mx-auto text-capitalize">

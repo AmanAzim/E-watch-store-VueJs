@@ -90,8 +90,8 @@ export default new Vuex.Store({
         });
         commit('setProducts', tempProducts);
       */
-      // axios.put('https://e-handy-store.firebaseio.com/storeWatches.json', storeProducts);
-      axios.get('https://e-handy-store.firebaseio.com/storeWatches.json')
+
+      axios.get(process.env.VUE_APP_SERVER)
         .then(res => {
           tempProducts = res.data
           commit('setProducts', tempProducts)

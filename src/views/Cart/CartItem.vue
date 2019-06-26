@@ -2,7 +2,7 @@
     <div class="row my-2 text-center text-capitalize">
         {{/*Image Col*/}}
         <div class="col-10 col-lg-2 mx-auto">
-            <img :src="item.img" :style="{width:'5rem',height:'5rem'}" class="img-fluid" alt="Product Image" />
+            <img :src="item.imgUrl" :style="{width:'5rem',height:'5rem'}" class="img-fluid" alt="Product Image" />
         </div>
 
         {{/*Product Col*/}}
